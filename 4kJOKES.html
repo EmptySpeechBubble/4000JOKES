@@ -7152,8 +7152,8 @@ const audienceReactions = [
                 
                 // Make elements visible again
                 jokeText.style.opacity = '1';
-                setupEmojiLine.style.opacity = '1';
-                punchlineEmojiLine.style.opacity = '1';
+                if (setupEmojiLine) setupEmojiLine.style.opacity = '1';
+                if (punchlineEmojiLine) punchlineEmojiLine.style.opacity = '1';
                 
                 // Speak the joke if speech is enabled
                 if (isSpeechEnabled) {
@@ -8886,88 +8886,6 @@ const audienceReactions = [
             // Add to history
             addToHistory(joke);
         };
-
-        // ============================================
-        // DECODE MODE - BCC Easter Egg Enhancement
-        // ============================================
-
-        function enableDecodeMode() {
-            console.log('📝 Decode mode enabled - watching for [REDACTED] text');
-            // Add click handlers to all redacted text in BCC mode
-            const observer = new MutationObserver(() => {
-                if (isBCCMode) {
-                    const jokeTextEl = document.querySelector('.joke-text');
-                    if (jokeTextEl && jokeTextEl.textContent.includes('[REDACTED]')) {
-                        console.log('🔍 Found [REDACTED] text, making it clickable');
-                        makeRedactedClickable(jokeTextEl);
-                    }
-                }
-            });
-
-            // Observe joke text changes
-            const jokeTextEl = document.querySelector('.joke-text');
-            if (jokeTextEl) {
-                observer.observe(jokeTextEl, {
-                    childList: true,
-                    characterData: true,
-                    subtree: true
-                });
-            }
-        }
-
-        function makeRedactedClickable(element) {
-            const text = element.textContent;
-
-            // Replace [REDACTED] and similar with clickable spans
-            const redactedPatterns = [
-                { pattern: /\[REDACTED[^\]]*\]/g, reveal: 'CLASSIFIED INFORMATION' },
-                { pattern: /\[CLASSIFIED[^\]]*\]/g, reveal: 'TOP SECRET DATA' },
-                { pattern: /\[INFORMATION [^\]]*\]/g, reveal: 'SENSITIVE DETAILS' },
-                { pattern: /\[SECURITY [^\]]*\]/g, reveal: 'ACCESS DENIED' },
-                { pattern: /█+/g, reveal: 'CENSORED' }
-            ];
-
-            let hasRedacted = false;
-            redactedPatterns.forEach(({pattern}) => {
-                if (pattern.test(text)) hasRedacted = true;
-            });
-
-            if (!hasRedacted) return;
-
-            // Create new HTML with clickable redactions
-            let newHTML = text;
-            redactedPatterns.forEach(({pattern, reveal}) => {
-                newHTML = newHTML.replace(pattern, (match) => {
-                    return `<span class="redacted-clickable" data-reveal="${reveal}" style="cursor: pointer; text-decoration: underline dotted; color: #ff4444;" title="Click to attempt decode">${match}</span>`;
-                });
-            });
-
-            element.innerHTML = newHTML;
-
-            // Add click handlers
-            const clickableSpans = element.querySelectorAll('.redacted-clickable');
-            console.log(`✅ Made ${clickableSpans.length} [REDACTED] sections clickable`);
-            clickableSpans.forEach(span => {
-                span.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    console.log('🎯 [REDACTED] CLICKED - Decoding...');
-                    const reveal = span.dataset.reveal;
-
-                    // Animate decode
-                    span.style.animation = 'glitch 0.5s';
-                    setTimeout(() => {
-                        span.textContent = reveal;
-                        span.style.color = '#00ff00';
-                        span.style.textDecoration = 'none';
-                        span.style.cursor = 'default';
-                        console.log('✅ Decoded:', reveal);
-                    }, 500);
-                });
-            });
-        }
-
-        // Initialize decode mode
-        enableDecodeMode();
 
         } // End initializeAdditionalFeatures
 
