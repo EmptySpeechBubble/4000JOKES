@@ -997,6 +997,8 @@
                 display: block !important;
                 opacity: 1 !important;
                 visibility: visible !important;
+                position: relative !important;
+                z-index: 100 !important;
             }
         }
 
@@ -1357,6 +1359,8 @@
             display: block !important;
             opacity: 1 !important;
             visibility: visible !important;
+            position: relative !important;
+            z-index: 100 !important;
         }
 
         .bcc-mode .generate-btn {
@@ -6066,7 +6070,7 @@ const audienceReactions = [
                 }
 
                 const savedCategory = localStorage.getItem('comedyClub4000_lastCategory');
-                if (savedCategory && savedCategory !== 'favorites') {
+                if (savedCategory && savedCategory !== 'favorites' && savedCategory !== 'nonsense') {
                     currentCategory = savedCategory;
                     updateCategoryButtons();
                 }
