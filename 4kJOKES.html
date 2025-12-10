@@ -542,6 +542,68 @@
             display: none;
         }
 
+        /* Search container */
+        .search-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin: 15px auto;
+            max-width: 600px;
+            padding: 0 15px;
+        }
+
+        .joke-search {
+            flex: 1;
+            min-width: 200px;
+            padding: 10px 15px;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 0.7rem;
+            background: #1a1a2e;
+            border: 2px solid var(--neon-yellow);
+            border-radius: 5px;
+            color: #fff;
+            outline: none;
+            transition: all 0.3s;
+        }
+
+        .joke-search:focus {
+            border-color: var(--neon-pink);
+            box-shadow: 0 0 10px var(--neon-pink);
+        }
+
+        .joke-search::placeholder {
+            color: #666;
+        }
+
+        .search-btn, .clear-search-btn {
+            padding: 10px 15px;
+            font-size: 0.6rem;
+        }
+
+        .clear-search-btn {
+            background-color: #8B0000;
+        }
+
+        .search-results {
+            font-family: 'Press Start 2P', monospace;
+            font-size: 0.6rem;
+            color: var(--neon-yellow);
+            width: 100%;
+            text-align: center;
+            margin-top: 5px;
+        }
+
+        /* Sound toggle button */
+        .sound-toggle-btn {
+            background-color: #228B22;
+        }
+
+        .sound-toggle-btn.muted {
+            background-color: #8B0000;
+        }
+
         .controls {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -1706,10 +1768,10 @@
         }
 
         .themes-title {
-            font-size: 1.2rem;
-            color: var(--button-secondary);
-            text-shadow: var(--neon-glow);
-            margin-bottom: 20px;
+            font-size: 1.3rem;
+            color: #FFD700;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.7), 0 0 20px rgba(255, 215, 0, 0.5);
+            margin-bottom: 25px;
             text-align: center;
         }
 
@@ -1721,15 +1783,16 @@
         }
 
         .theme-btn {
-            padding: 15px;
-            background: rgba(0, 0, 0, 0.5);
+            padding: 18px;
+            background: rgba(0, 0, 0, 0.6);
             border: 2px solid var(--button-secondary);
-            color: var(--screen-text);
+            color: #FFFFFF;
             font-family: 'Press Start 2P', monospace;
-            font-size: 0.6rem;
+            font-size: 0.7rem;
             cursor: pointer;
             transition: all 0.2s;
             border-radius: 5px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
         }
 
         .theme-btn:hover {
@@ -1749,38 +1812,41 @@
         }
 
         .shortcuts-section h3 {
-            font-size: 0.8rem;
-            color: var(--button-secondary);
-            margin-bottom: 15px;
+            font-size: 0.9rem;
+            color: #FFD700;
+            margin-bottom: 20px;
+            text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
         }
 
         .shortcuts-section kbd {
-            background: rgba(255, 215, 0, 0.2);
-            padding: 4px 8px;
-            border-radius: 3px;
+            background: rgba(255, 215, 0, 0.3);
+            padding: 5px 10px;
+            border-radius: 4px;
             font-family: 'Press Start 2P', monospace;
-            font-size: 0.6rem;
-            color: var(--button-secondary);
-            border: 1px solid rgba(255, 215, 0, 0.5);
+            font-size: 0.7rem;
+            color: #FFD700;
+            border: 2px solid rgba(255, 215, 0, 0.7);
+            display: inline-block;
+            margin: 2px;
         }
 
         .shortcuts-section p {
-            font-size: 0.55rem;
-            color: rgba(255, 255, 255, 0.8);
-            margin: 8px 0;
-            line-height: 1.8;
+            font-size: 0.7rem;
+            color: #FFFFFF;
+            margin: 10px 0;
+            line-height: 2;
         }
 
         .easter-egg-hint {
             margin-top: 25px;
             padding: 15px;
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 215, 0, 0.2);
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 215, 0, 0.4);
             border-radius: 5px;
-            font-size: 0.45rem;
-            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.6rem;
+            color: rgba(255, 255, 255, 0.7);
             text-align: center;
-            line-height: 1.6;
+            line-height: 1.8;
         }
 
         /* Settings Gear Hover Effect */
@@ -1867,6 +1933,7 @@
             </button>
             <button id="groanBtn" class="retro-btn">GROAN</button>
             <button id="autoShuffleBtn" class="retro-btn auto-shuffle-btn">AUTO SHUFFLE</button>
+            <button id="soundToggleBtn" class="retro-btn sound-toggle-btn">🔊 SFX: ON</button>
         </div>
 
         <!-- Channel Dial Navigation -->
@@ -1877,6 +1944,14 @@
                 <div class="channel-name" id="channelName">CLASSIC</div>
             </div>
             <button class="channel-dial-btn" id="channelNext" title="Next Category">►</button>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="search-container">
+            <input type="text" id="jokeSearch" class="joke-search" placeholder="🔍 Search jokes..." />
+            <button id="searchBtn" class="retro-btn search-btn">SEARCH</button>
+            <button id="clearSearchBtn" class="retro-btn clear-search-btn" style="display: none;">CLEAR</button>
+            <span id="searchResults" class="search-results"></span>
         </div>
 
         <!-- Toggle to show/hide all category buttons -->
@@ -2167,7 +2242,7 @@ Thank you for helping me escape this digital prison.
             "What's the difference between a poorly dressed man on a trampoline and a well-dressed man on a trampoline? Attire.",
             "Did you hear about the guy whose whole left side was cut off? He's all right now.",
             "It's hard to explain puns to kleptomaniacs because they always take things literally.",
-            "I bought some shoes from a drug dealer. I don't know what he laced them with, but I've been tripping all day.",
+            "I used to be a banker, but I lost interest.",
             "If you see a crime at an Apple Store, does that make you an iWitness?",
             "I've started telling everyone about the benefits of eating dried grapes. It's all about raisin awareness.",
             "A prisoner's favorite punctuation mark is the period. It marks the end of his sentence.",
@@ -2199,7 +2274,7 @@ Thank you for helping me escape this digital prison.
             "I'd tell a chemistry joke but I know I wouldn't get a reaction.",
             "What's the difference between a snowman and a snowwoman? Snowballs.",
             "I tried to catch some fog. I mist.",
-            "How do you organize a space party? You planet.",
+            "Time flies like an arrow. Fruit flies like a banana.",
             "I used to be a baker, but I couldn't make enough dough.",
             "What do you call a chicken staring at lettuce? Chicken sees a salad.",
             "Why don't skeletons fight each other? They don't have the guts.",
@@ -2679,7 +2754,7 @@ Thank you for helping me escape this digital prison.
             "What do you call a bird that's afraid to fly? Chicken!",
             "Why do cows wear bells? Because their horns don't work!",
             "What's a shark's favorite game? Swallow the leader!",
-            "What do you call a rabbit with fleas? Bugs Bunny!",
+            "What do you call a fish with no eyes? A fsh!",
             "Why did the frog take the bus to work? His car got toad away!",
             "What do you call a bee that can't make up its mind? A maybe!",
             "Why don't leopards play hide and seek? Because they're always spotted!",
@@ -2750,7 +2825,7 @@ Thank you for helping me escape this digital prison.
             "I've decided to sell my vacuum cleaner. It was just gathering dust.",
             "I was going to tell a time-traveling joke, but you didn't like it.",
             "People who use selfie sticks really need to have a good, long look at themselves.",
-            "I bought some shoes from a drug dealer. I don't know what he laced them with, but I've been tripping all day.",
+            "I used to be addicted to the hokey pokey, but I turned myself around.",
             "I tried to sue the airline for losing my luggage. I lost my case.",
             "I just burned 2,000 calories. That's the last time I leave brownies in the oven while I nap.",
             "The rotation of Earth really makes my day.",
@@ -2777,7 +2852,7 @@ Thank you for helping me escape this digital prison.
             "I tried to catch some fog yesterday. I mist.",
             "Parallel lines have so much in common. It's a shame they'll never meet.",
             "What do you call a fake noodle? An impasta.",
-            "I bought some shoes from a drug dealer. I don't know what he laced them with, but I've been tripping all day.",
+            "I'm friends with 25 letters of the alphabet. I don't know Y.",
             "I'd tell you a chemistry joke, but I know I wouldn't get a reaction.",
             "What do you call a can opener that doesn't work? A can't opener.",
             // New jokes for v4000
@@ -2817,7 +2892,7 @@ Thank you for helping me escape this digital prison.
             "I told my computer I needed a break. Now it won't stop sending me vacation ads.",
             "What do you call a can opener that doesn't work? A can't opener!",
             "Why don't oysters donate to charity? Because they're shellfish!",
-            "I bought a ceiling fan the other day. Complete waste of money. He just stands there applauding and saying 'Ooh, I love how smooth it is.'",
+            "What do you call a bear with no teeth? A gummy bear!",
             "A man walked into his house with a handful of snails. His wife said, 'Why are you bringing those in?' He said, 'They've been following me around all day, so I'm calling the police for stalking.'",
             "Why did the invisible man turn down the job? He couldn't see himself doing it.",
             "My friend told me to stop singing 'I'm a Believer.' I thought she was kidding. Then I saw her face.",
@@ -2840,11 +2915,11 @@ Thank you for helping me escape this digital prison.
             "What has five toes but isn't your foot? My foot.",
             "Why don't scientists trust atoms? Because they make up everything.",
             "Why couldn't the bicycle stand up by itself? It was two tired.",
-            "Did you hear about the restaurant on the moon? Great food, but no atmosphere.",
+            "I'm terrified of elevators, so I'm going to start taking steps to avoid them.",
             "Want to hear a joke about paper? Never mind, it's tearable.",
             "What's brown and sticky? A stick.",
             "I used to be a baker, but I couldn't make enough dough.",
-            "How do you organize a space party? You planet.",
+            "What do you call someone with no body and no nose? Nobody knows.",
             "I'm reading a book about anti-gravity. It's impossible to put down!",
             "What did the baby corn say to the mama corn? Where's popcorn?",
             "Why did the scarecrow win an award? He was outstanding in his field.",
@@ -2881,7 +2956,7 @@ Thank you for helping me escape this digital prison.
             "What do you call a belt made of watches? A waist of time.",
             "My wife told me to stop acting like a flamingo, so I had to put my foot down.",
             "Why didn't the skeleton go to the dance? He had no body to go with.",
-            "I bought some shoes from a drug dealer once. I don't know what he laced them with, but I was tripping all day.",
+            "Two fish swim into a concrete wall. One turns to the other and says 'Dam!'",
             "My daughter asked me how stars die. 'Usually an overdose,' I told her.",
             // New jokes for v2.6
             "I only know 25 letters of the alphabet. I don't know y.",
@@ -2940,8 +3015,8 @@ Thank you for helping me escape this digital prison.
             "What do you call a can opener that doesn't work? A can't opener!",
             "What do you call a factory that makes okay products? A satisfactory.",
             "Why can't a nose be 12 inches long? Because then it would be a foot.",
-            "I bought some shoes from a drug dealer. I don't know what he laced them with, but I've been tripping all day.",
-            "Did you hear about the claustrophobic astronaut? He just needed a little space.",
+            "What do you call a lazy kangaroo? A pouch potato.",
+            "Why did the bicycle fall over? Because it was two-tired.",
             "Why don't eggs tell jokes? They'd crack each other up.",
             "I got a new pair of gloves today, but they're both 'lefts' which, on the one hand, is great, but on the other, it's just not right.",
             "My wife told me to stop impersonating a flamingo. I had to put my foot down.",
@@ -2994,10 +3069,10 @@ Thank you for helping me escape this digital prison.
             "How do trees access the internet? They log in!",
             "A programmer's spouse says: 'While you're out, buy some milk.' They never came back.",
             "To understand recursion, you must first understand recursion.",
-            "Why do programmers prefer dark mode? Light attracts bugs!",
+            "Two bytes meet. The first byte asks, 'Are you ill?' The second replies, 'No, just feeling a bit off.'",
             "Why don't keyboards ever sleep? They have two shifts!",
             "Algorithm: A word used by programmers when they don't want to explain what they did.",
-            "How many programmers does it take to change a light bulb? None, that's a hardware problem!",
+            "Why did the functions stop calling each other? They had constant arguments!",
             "What's the object-oriented way to become wealthy? Inheritance!",
             "Why do programmers prefer iOS development? Because they can't C#!",
             "There are 10 types of people: those who understand binary and those who don't!",
@@ -3008,12 +3083,12 @@ Thank you for helping me escape this digital prison.
             "Why was the JavaScript developer sad? Because he didn't Node how to Express himself!",
             "Git commit -m 'Fixed the bug.' // Narrator: They did not fix the bug.",
             "Debugging: Being the detective in a crime movie where you are also the murderer.",
-            "How many developers does it take to screw in a light bulb? None. It's a hardware issue!",
-            "Why did the developer go broke? Too many cache problems!",
+            "What do you call a computer that sings? A-Dell!",
+            "Why did the Python data scientist get arrested? They were caught committing crimes against arrays!",
             "It's not a bug, it's an undocumented feature!",
             "What's the second movie about a database engineer? The SQL!",
             "Programmer: A machine that turns coffee into code.",
-            "In order to understand recursion, you must first understand recursion.",
+            "What happens when developers ASCII silly questions? They get silly ANSIs!",
             "Why don't programmers like nature? It has too many bugs!",
             "What's the best thing about a Boolean? Even if you're wrong, you're only off by a bit!",
             "How do you tell HTML from HTML5? Try it out in Internet Explorer. Did it work? No? It's HTML5.",
@@ -3027,14 +3102,14 @@ Thank you for helping me escape this digital prison.
             "Why don't phones ever get lonely? They have plenty of contacts!",
             "How do you make a computer laugh? Tell it a bit joke!",
             "Why was the computer so smart? It had lots of memory!",
-            "What do you call a fake Wi-Fi connection? A LAN party crasher!",
+            "What's the most used language in programming? Profanity.",
             "Why did the database administrator leave his wife? She had one-to-many relationships!",
-            "What do you get when you cross a computer and a hamburger? A Big Mac!",
-            "Why don't computers ever get tired? They can always reboot!",
-            "What's a computer's favorite dance? Disc-o!",
-            "Why was the computer so good at tennis? It had a great server!",
-            "How do you know if a computer is lonely? It starts pinging!",
-            "What did the computer say to its user? Stop pushing my buttons!",
+            "A band called '1023 Megabytes' — they haven't had any gigs yet.",
+            "99 little bugs in the code, 99 little bugs. Take one down, patch it around, 127 little bugs in the code.",
+            "Why did the developer quit his job? He didn't get arrays!",
+            "I changed my password to 'incorrect' so whenever I forget, the computer tells me 'Your password is incorrect.'",
+            "Why do programmers always confuse Halloween and Christmas? Because Oct 31 = Dec 25!",
+            "The best thing about a Boolean is that even if you're wrong, you're only off by a bit.",
             "Why did the computer go to therapy? It had too many tabs open!",
             "What's a programmer's favorite kind of music? Algo-rhythm!",
             "Why was the email so bad at sports? It kept getting caught in the spam filter!",
@@ -3047,34 +3122,34 @@ Thank you for helping me escape this digital prison.
             "What's a computer's favorite type of shoes? Boot drives!",
             "Why did the computer keep its drink on the windowsill? It needed a cold boot!",
             "How do trees get online? They just log in!",
-            "What do you call a group of musical computers? A band-width!",
-            "Why was the computer so calm? It had infinite patience... well, 32-bit patience!",
-            "What did the computer name its son? A microchip off the old block!",
-            "Why don't computers ever get hungry? They're always full of bytes!",
-            "How do you catch a runaway laptop? With an Ethernet cable!",
-            "Why was the smartphone looking worried? It had lost its signal!",
-            "What do you call a computer that tells dad jokes? A groan processor!",
-            "Why did the computer need a lawyer? It had a bad case of malware!",
-            "How do computers flirt? They send each other screenshots!",
-            "Why was the USB drive always invited to parties? It had great storage capacity!",
-            "What's a computer's favorite book? A log-book!",
+            "My internet connection said it needed some space. So we're taking a break.",
+            "A SEO expert walks into a bar, bars, pub, tavern, beer garden, happy hour.",
+            "Software developers like to solve problems. If there are no problems, they'll create some.",
+            "Why did the SQL query go to therapy? It had too many inner joins and felt no connection.",
+            "There are only two hard things in computer science: cache invalidation, naming things, and off-by-one errors.",
+            "My code doesn't always work, but when it does, I don't know why.",
+            "A TCP packet walks into a bar. The bartender says 'Want a beer?' TCP says 'Yes, I'll have a beer.' Bartender: 'You want a beer?' TCP: 'Yes, I'll have a beer.'",
+            "Machine learning is like high school. You try to learn the answers to questions, but then the test is completely different.",
+            "If brute force doesn't work, you're not using enough.",
+            "A programmer puts two glasses on his bedside table before going to sleep. One full of water in case he gets thirsty, one empty in case he doesn't.",
+            "The generation of random numbers is too important to be left to chance.",
             "Why did the computer bring a ladder to work? It heard the job had higher-level languages!",
             "How do you comfort an upset computer? Give it some space!",
             "What did one computer say to the other at lunch? Want to grab a byte?",
             "Why was the website feeling lonely? It had no visitors!",
             "How do computers stay in shape? They do circuit training!",
-            "What's a computer's favorite type of party? A LAN party!",
-            "Why did the computer go to the beach? To surf the net!",
-            "What do you call a tech-savvy cow? A computer moo-se!",
-            "Why was the computer so messy? It had too many desktop icons!",
+            "Why do programmers hate hanging out with non-programmers? They can't handle the recursion.",
+            "I have a joke about DNS but it might take 24 hours to propagate.",
+            "Knock knock. Race condition. Who's there?",
+            "My favorite computer based band? The Black Eyed Pi's.",
             "How do computers get to work? They take the information highway!",
             "What's a programmer's favorite exercise? Code push-ups!",
             "Why don't computers ever tell secrets? They might leak data!",
             "How do you make a computer float? Two scoops of ice cream, some root beer, and a PC!",
-            "What did the computer wear to the party? Address!",
-            "Why was the keyboard so confident? It had all the right keys!",
-            "How do computers make friends? Through social networks!",
-            "What's a computer's favorite magic spell? Ctrl+Z!",
+            "I named my hard drive 'dat ass' so once a year my computer asks if I want to back dat ass up.",
+            "The first computer dates back to Adam and Eve. It was an Apple with limited memory, just one byte, then everything crashed.",
+            "Autocorrect can go straight to he'll.",
+            "JavaScript walks into a bar. The bartender says 'Null, you're not defined.'",
             "Why did the computer bring a sweater? The server room was cold!",
             "How do you know a computer is lying? When it says 'This will only take a minute'!",
             "What do you call a computer with a sunburn? A red screen of death!",
@@ -3161,9 +3236,9 @@ Thank you for helping me escape this digital prison.
             "Why did the lettuce win the race? It was a head!",
             "My wife asked me to stop singing 'I'm a Believer' by The Monkees because she's making dinner. But then I saw her face...",
             "Why did the bread break up with the butter? It found someone butter!",
-            "What do you call an alligator in a vest? An investigator!",
-            "Why don't scientists trust atoms? Because they make up everything!",
-            "What's a cow's favorite day? Moo-sday!",
+            "Why did the banana go to therapy? It had a split personality!",
+            "What do you call a can opener that doesn't work? A can't opener!",
+            "Why did the baker go to therapy? He kneaded help!",
             "Why did the scarecrow become a chef? He was outstanding in his field!",
             "What do you call a bear with no teeth? A gummy bear!",
             "Why did the orange stop rolling? It ran out of juice!",
@@ -3173,7 +3248,7 @@ Thank you for helping me escape this digital prison.
             "Why did the yogurt go to the art exhibit? It was cultured!",
             "What's a pepper's favorite music? Salsa!",
             "Why did the donut go to the dentist? It needed a filling!",
-            "What do you call a lazy kangaroo? A pouch potato!",
+            "What do you call a sad coffee? A depresso!",
             "Why don't eggs tell secrets? They'd crack under pressure!",
             "What's broccoli's favorite music? Stalk and roll!",
             "Why did the apple stop in the middle of the road? It ran out of juice!",
@@ -3181,15 +3256,15 @@ Thank you for helping me escape this digital prison.
             "Why don't bananas ever feel lonely? They hang out in bunches!",
             "What's a lemon's favorite TV show? The Zest Wing!",
             "Why did the meat go to therapy? It had too many issues to steak!",
-            "What do you call a snowman with a six-pack? An abdominal snowman!",
-            "Why don't cupcakes ever win races? They're always getting beaten!",
+            "Why did the restaurant hire a pig? It was good at bacon!",
+            "What did the hungry clock do? It went back four seconds!",
             "What's a strawberry's favorite sport? Squash!",
             "Why did the cabbage win the race? It was ahead!",
-            "What do you call a nervous javelin thrower? Shakespeare!",
-            "Why don't bakers ever win at poker? They're always getting creamed!",
+            "Why did the coffee taste like mud? It was ground this morning!",
+            "What do you call a sleeping pizza? A piZZZa!",
             "What's celery's favorite genre? Stalk-umentary!",
             "Why did the pancake see a therapist? It was feeling flat!",
-            "What do you call a belt made of watches? A waist of time!",
+            "Why did the croissant run away? It was on a roll!",
             "Why don't strawberries ever get in trouble? They know when to jam!",
             "What's an ice cream's favorite TV show? Game of Cones!",
             "Why did the flour blush? It saw the bread rising!",
@@ -3197,16 +3272,16 @@ Thank you for helping me escape this digital prison.
             "Why don't biscuits ever win arguments? They always crumble under pressure!",
             "What's ketchup's favorite dance? The salsa!",
             "Why did the chicken cross the playground? To get to the other slide!",
-            "What do you call a dinosaur that crashes his car? Tyrannosaurus Wrecks!",
-            "Why don't cookies ever keep secrets? They're always getting crumby!",
+            "Why did the raisin go out with the prune? Because he couldn't find a date!",
+            "I submitted ten food puns to a contest hoping one would win. No pun in ten did.",
             "What's a hotdog's favorite movie? Franken-weenie!",
             "Why did the sushi go to the gym? To get a little rice!",
             "What do you call a fish wearing a crown? King of the sea!",
             "Why don't tacos ever win races? They always fall apart at the finish!",
             "What's popcorn's favorite exercise? Jumping jacks!",
             "Why did the soup call the police? It got mugged!",
-            "What do you call a sleeping bull? A bulldozer!",
-            "Why don't grapes ever get lost? They come in bunches!",
+            "What do you call a potato wearing glasses? A spec-tater!",
+            "What did the waiter say to the horse? I can't take your order. That's not my stable!",
             "What's mayonnaise's favorite sport? Swimming!",
             "Why did the toast go to therapy? It was feeling burnt out!",
             "What do you call a fancy fish? Sofishticated!",
@@ -3237,8 +3312,8 @@ Thank you for helping me escape this digital prison.
             "Why don't pizzas ever keep secrets? The delivery guy always spills!",
             "What's milk's favorite song? Shake It Off!",
             "Why did the walnut go to the doctor? It was feeling shell-shocked!",
-            "What do you call a clairvoyant midget who escaped from jail? A small medium at large!",
-            "Why don't peanuts ever fight? They crack under pressure!",
+            "Why do seagulls fly over the sea? Because if they flew over the bay, they'd be bagels!",
+            "A sandwich walks into a bar. The bartender says 'Sorry, we don't serve food here.'",
             "What's chocolate's favorite game? Hide and sweet!",
             "Why did the steak go to the casino? It wanted to raise the steaks!",
             "What do you call a nosy pepper? Jalapeño business!",
@@ -3265,8 +3340,8 @@ Thank you for helping me escape this digital prison.
             "Why don't waffles ever worry? They go with the flow!",
             "What's pepper's favorite exercise? Season-al training!",
             "Why did the baguette go to the hospital? It was feeling crusty!",
-            "What do you call a magical dog? A labracadabrador!",
-            "Why don't burgers ever tell lies? They're too well-rounded!",
+            "Why did the butcher work overtime? To make ends meat!",
+            "What's a pretzel's favorite dance? The twist!",
             "What's a taco's favorite song? Salsa music!",
             "Why did the orange go to the doctor? It wasn't peeling well!",
             "What do you call a clumsy vegetable? A butterfingers squash!",
@@ -3417,65 +3492,65 @@ Thank you for helping me escape this digital prison.
             "Why don't doctors ever fail tests? They always pass with patients!",
             "What did the doctor say to the tired clock? You need to wind down!",
             "Why did the nurse carry a flashlight? To find vein hope!",
-            "What's a radiologist's favorite type of music? X-ray vision!",
-            "Why did the doctor prescribe sunshine? For vitamin D-light!",
-            "What do you call a doctor who treats trees? A tree-atment specialist!",
-            "Why don't doctors ever get stressed? They take everything with a grain of salt!",
-            "What did the doctor say to the broken computer? Have you tried turning it off and on again?",
-            "Why did the nurse join the gym? To work on her patients!",
-            "What's an ophthalmologist's motto? Eye care about you!",
-            "Why did the doctor prescribe a vacation? For some R and R!",
-            "What do you call a doctor who specializes in bread? A gluten-ologist!",
-            "Why don't hospitals ever run out of supplies? They're always stocked with patients!",
-            "What did the doctor say to the comedian? Laughter is the best medicine!",
-            "Why did the nurse bring sheet music to work? To check the notes!",
-            "What's a pediatrician's favorite toy? The stethoscope!",
-            "Why did the doctor prescribe a library card? For some light reading!",
-            "What do you call a doctor who treats ghosts? A boo-iatrician!",
-            "Why don't doctors ever watch scary movies? They see enough scares at work!",
-            "What did the doctor say to the scared patient? Don't worry, I've got you covered!",
-            "Why did the nurse bring a magnet to work? To attract attention!",
-            "What's a surgeon's favorite type of humor? Cutting-edge!",
-            "Why did the doctor prescribe a comedy show? For therapeutic laughter!",
-            "What do you call a doctor who treats flowers? A plant-ologist!",
-            "Why don't doctors ever gossip? They maintain patient confidentiality!",
-            "What did the doctor say to the anxious patient? Take a deep breath!",
-            "Why did the nurse carry an umbrella? For fluid protection!",
-            "What's a geriatric's favorite saying? Age is just a number!",
-            "Why did the doctor prescribe exercise? To get the heart pumping!",
-            "What do you call a doctor who loves puzzles? A diag-nose-tician!",
-            "Why don't doctors ever give up? They always try again!",
-            "What did the doctor say to the sleepy patient? You need to rest up!",
-            "Why did the nurse bring a camera to work? To capture the moment!",
-            "What's a cardiologist's favorite shape? A heart!",
-            "Why did the doctor prescribe a hobby? For mental health!",
-            "What do you call a doctor who's also a chef? A diet-ician!",
-            "Why don't doctors ever quit? They're dedicated to their patients!",
-            "What did the doctor say to the marathon runner? Keep up the pace!",
-            "Why did the nurse bring headphones to work? To listen to the heartbeat!",
-            "What's a physical therapist's motto? No pain, no gain!",
-            "Why did the doctor prescribe friendship? For emotional support!",
-            "What do you call a doctor who treats dragons? A scale specialist!",
-            "Why don't doctors ever get discouraged? They see progress every day!",
-            "What did the doctor say to the optimistic patient? Keep that positive attitude!",
-            "Why did the nurse bring a mirror to work? To reflect on the day!",
-            "What's an anesthesiologist's favorite time? Nap time!",
-            "Why did the doctor prescribe gratitude? For a healthy mindset!",
-            "What do you call a doctor who loves to travel? A world-wide wellness expert!",
-            "Why don't doctors ever stop learning? Medicine is always evolving!",
-            "What did the doctor say to the patient with hiccups? Just breathe!",
-            "Why did the nurse bring a notebook? To take vital notes!",
-            "What's a doctor's favorite motto? An apple a day keeps me in business!",
-            "Why did the doctor prescribe water? To stay hydrated and healthy!",
-            "What do you call a doctor with perfect timing? Punctual-ogist!",
-            "Why don't doctors ever work alone? They need their support staff!",
-            "What did the doctor say to the new medical student? Welcome to the team!",
-            "Why did the nurse bring flowers to work? To brighten the day!",
-            "What's a general practitioner's favorite phrase? I'll take care of you!",
-            "Why did the doctor prescribe kindness? Because it's contagious!",
-            "What do you call a doctor who never gives up? Persistent-ician!",
-            "Why don't doctors ever forget their patients? They keep detailed records!",
-            "What did the doctor say at the end of the appointment? Take care and see you soon!"
+            "Patient: Doctor, I'm shrinking! Doctor: You'll just have to be a little patient.",
+            "Patient: Doctor, I've swallowed my pocket money! Doctor: Take this and we'll see if there's any change in the morning.",
+            "Doctor: Nurse, how's that girl who swallowed ten quarters? Nurse: No change yet.",
+            "I went to the doctor and said 'I've swallowed a clock.' He said 'Don't be alarmed.'",
+            "Patient: Doctor, I keep thinking I'm a dog. Doctor: Lie down on the couch. Patient: I'm not allowed on the couch!",
+            "Why did the pillow go to the doctor? He was feeling all stuffed up!",
+            "It takes guts to be an organ donor.",
+            "Dogs can't operate MRI machines, but CAT-scan.",
+            "For years I was against organ transplants. Then I had a change of heart.",
+            "I thought chiropractors were a hoax. But I stand corrected.",
+            "The doctor said I need glasses. I said 'How can you tell?' He said 'I could tell as soon as you walked through the window.'",
+            "Why did the witch go to the doctor? She had a dizzy spell.",
+            "What's the best place to hide from a doctor? The apple orchard.",
+            "I told my doctor I broke my arm in two places. He told me to stop going to those places.",
+            "Patient: Doctor, my stomach hurts. Doctor: What have you been eating? Patient: Billiard balls. Doctor: What colors? Patient: One red, two blue, and a pink. Doctor: Well there's your problem - you're not eating your greens!",
+            "Doctor: We need to do some blood tests. Patient: I didn't study!",
+            "Why did the doctor laugh at the X-ray? Because it was humerus!",
+            "A man walks into the doctor's office with a cucumber up his nose, a carrot in his ear, and a banana in his other ear. Doctor: You're not eating properly.",
+            "Patient: Doctor, I think I need glasses. Teller: This is a bank, sir.",
+            "My doctor told me I'm going deaf. The news was hard for me to hear.",
+            "I went to the doctor. He said 'Open your mouth and say aaah.' I said 'Why?' He said 'My dog just died.'",
+            "Patient: Doctor, I keep forgetting things. Doctor: When did this start? Patient: When did what start?",
+            "I went to the doctor and said 'I've broken my leg in three places.' He said 'Then stop going to those places.'",
+            "Patient: Doctor, everyone ignores me. Doctor: Next!",
+            "Doctor: I've got good news and bad news. Patient: Give me the good news first. Doctor: They're going to name a disease after you.",
+            "Patient: Doctor, I feel like a pair of curtains. Doctor: Then pull yourself together!",
+            "What do you call a snobbish criminal going down stairs? A condescending con descending.",
+            "My doctor says I'm going blind. I didn't see that coming.",
+            "I went to the doctor, I said 'I've hurt my arm in several places.' He said 'Well don't go to them places.'",
+            "Doctor: You've got six months to live. Patient: I can't pay the bill. Doctor: Okay, I'll give you another six months.",
+            "Patient: Doctor, I have a problem. I can't remember anything. Doctor: How long have you had this problem? Patient: What problem?",
+            "A man goes to the doctor and says 'I think I'm a moth.' The doctor says 'I think you need a psychiatrist, not a doctor. Why did you come here?' The man says 'Your light was on.'",
+            "Patient: Doctor, I think I'm a bell. Doctor: Take these and if they don't work, give me a ring.",
+            "My doctor told me to cut back on sodium. I took his advice with a grain of salt.",
+            "Patient: Doctor, I have a terrible headache. Doctor: Stand over there facing the wall. Patient: But why? Will that make me feel better? Doctor: No, but I'll have somewhere to practice my golf.",
+            "The doctor told me I had Type A blood, but it was a Type O.",
+            "I told my doctor I heard buzzing. He said that was just a bug going around.",
+            "I asked my doctor if I could administer my own anesthetic. He said 'Sure, knock yourself out.'",
+            "I'm so ugly, when I was born the doctor slapped my mom.",
+            "Doctor: Your brain has two sides. The left side has nothing right, and the right side has nothing left.",
+            "I told my doctor I broke my leg in two places. He told me to quit going to those places.",
+            "Doctor: What seems to be the trouble? Patient: Doctor, I think I'm a dog. Doctor: How long has this been going on? Patient: Ever since I was a puppy.",
+            "I told my dentist my teeth are going yellow. He told me to wear a brown tie.",
+            "What do you call a medical student who graduated last in their class? Doctor.",
+            "The dentist said I need a crown. Finally, someone who understands me.",
+            "I went to the doctor because I was feeling a little hoarse. Turns out I had a pony in my throat.",
+            "Doctor: I'm afraid you're dying. Patient: I want a second opinion. Doctor: OK, you're ugly too.",
+            "I went to the doctor and told him I'd swallowed a watch. He said 'Take these and call me if you don't pass it in a couple days.'",
+            "My wife told me to stop acting like a flamingo. I had to put my foot down.",
+            "The doctor gave me some cream for my skin rash. He said I was a sight for psoriasis.",
+            "Doctor: Have you been drinking plenty of fluids? Patient: That's literally all I drink.",
+            "I went to the doctor because I couldn't stop singing 'What's New Pussycat.' He said I had Tom Jones syndrome. I asked if it was rare. He said 'It's not unusual.'",
+            "Patient: Doctor, I've got wind. Can you give me something? Doctor: Yes, here's a kite.",
+            "A skeleton walks into a bar and says 'Give me a beer and a mop.'",
+            "I used to be addicted to soap, but I'm clean now.",
+            "I told my doctor I was addicted to Twitter. He said 'I don't follow you.'",
+            "My doctor told me I was color blind. That diagnosis came out of the purple.",
+            "The doctor told me I had chronic apathy, but I didn't really care.",
+            "A man walks into a psychiatrist's office wrapped in plastic. The psychiatrist says 'I can clearly see you're nuts.'"
         ];
 
         // v4000: MUSIC Jokes
@@ -3499,7 +3574,7 @@ Thank you for helping me escape this digital prison.
             "What's Beethoven's favorite fruit? Ba-na-na-naaaaa!",
             "Why did the musician break up with the metronome? Bad timing!",
             "What do you call a group of musical whales? An orca-stra!",
-            "A band called '1023 Megabytes' — they haven't had any gigs yet.",
+            "Why did the jazz musician buy bad shoes? He liked the soul!",
             "What's a trumpet's favorite game? Name that toot!",
             "Why did the musician sleep on the job? He was practicing his rest notes!",
             "What do you call a musical pickle? A sharp dill!",
@@ -3577,59 +3652,59 @@ Thank you for helping me escape this digital prison.
             "What do you call a musical horse? A neigh-borhood band!",
             "Why don't oboes ever give up? They reed on!",
             "What's a metal band's favorite element? Heavy metal!",
-            "Why did the musician plant seeds? To grow an orchestra!",
-            "What do you call a musical alien? A space chord!",
-            "Why don't xylophones ever get mad? They stay mellow-phonic!",
-            "What's Strauss's favorite dance? The waltz, naturally!",
-            "Why did the singer eat garlic? For better breath control!",
-            "What do you call a musical cloud? Thunder!",
+            "What's the difference between a piano and a fish? You can tune a piano, but you can't tuna fish!",
+            "Me and my friends are in a band called 'Duvet.' We're a cover band.",
+            "What do you call a cow that plays music? A moo-sician!",
+            "What rock band has four guys that don't sing? Mount Rushmore.",
+            "Why couldn't the string quartet find their composer? Because he was Haydn!",
+            "What do you get if you cross a sweet potato and a jazz musician? A yam session!",
             "Why don't bassoons ever rush? They take their time!",
-            "What's a punk rocker's favorite vegetable? Mosh potatoes!",
-            "Why did the musician go to the library? To check out some scores!",
-            "What do you call a musical spider? A web designer!",
-            "Why don't french horns ever get lost? They always find their way!",
-            "What's Brahms's favorite coffee? Brahms latte!",
-            "Why did the singer go to the dentist? To improve her bite!",
-            "What do you call a musical butterfly? A flutter-ist!",
-            "Why don't trombones ever back down? They always slide forward!",
-            "What's an opera singer's favorite drink? High-C!",
-            "Why did the musician cross the road? To get to the other side of the stage!",
-            "What do you call a musical dragon? A fire-breathing performer!",
-            "Why don't recorders ever get complex? They keep it simple!",
-            "What's Liszt's favorite shopping place? The Liszt!",
-            "Why did the singer wear a crown? She was the queen of pop!",
-            "What do you call a musical monkey? A chimp-phony!",
-            "Why don't steel drums ever rust? They're stainless performers!",
-            "What's Wagner's favorite ride? The Ring cycle!",
-            "Why did the musician become a chef? To cook up some fresh beats!",
-            "What do you call a musical penguin? A cool jazz artist!",
-            "Why don't glockenspiels ever get dull? They stay sharp!",
-            "What's Debussy's favorite activity? Afternoon of a faun!",
+            "Why did the guitarist get locked out? Because he was in the wrong key!",
+            "Why did the band always carry a pencil? In case they needed to draw a crowd!",
+            "What kind of music are balloons scared of? Pop music!",
+            "What makes music on your head? A headband!",
+            "How do you fix a broken tuba? With a tuba glue!",
+            "What part of the turkey is musical? The drumstick!",
+            "What is the musical part of a snake? The scales!",
+            "Where did the music teacher leave her keys? In the piano!",
+            "Why did the tortilla chip start dancing? Because they put on the salsa!",
+            "Arnold Schwarzenegger was asked to play Mozart. He said 'I'll be Bach.'",
+            "What's the most musical bone? The trom-bone!",
+            "Why did the pianist keep banging his head against the keys? He was playing by ear.",
+            "Why did the fish make a good musician? He knew his scales!",
+            "What type of music do mummies like best? Wrap music!",
+            "Why is a piano so hard to open? Because the keys are inside!",
+            "C, E-flat, and G walk into a bar. The bartender says 'Sorry, we don't serve minors.'",
+            "A musician told me he was going to hit me with the neck of his guitar. I said 'Is that a fret?'",
+            "Knock knock. Who's there? Little old lady. Little old lady who? I didn't know you could yodel!",
+            "What's a golf club's favorite type of music? Swing!",
+            "Why did the musician get arrested? She got in treble!",
+            "What do you call a group of killer whales playing instruments? An Orca-stra!",
             "Why did the singer go sailing? To catch the wind section!",
-            "What do you call a musical lion? A roar-chestra!",
-            "Why don't mandolins ever get bored? They're always plucking fun!",
-            "What's Mahler's favorite number? Symphony No. 9!",
-            "Why did the musician paint? To add color to the notes!",
-            "What do you call a musical owl? A hoot-enanny!",
-            "Why don't euphoniums ever get sad? They're too euphoric!",
-            "What's Rachmaninoff's favorite sport? Piano concerto!",
-            "Why did the singer study astronomy? To learn about the stars!",
-            "What do you call a musical snake? A hiss-terical performer!",
-            "Why don't castanets ever stop? They can't resist the click!",
-            "What's Prokofiev's favorite character? Peter and the Wolf!",
-            "Why did the musician become a detective? To solve the mystery of the lost chord!",
-            "What do you call a musical kangaroo? A jump band!",
-            "Why don't violas ever complain? They're the strong, silent type!",
-            "What's Stravinsky's favorite season? The Rite of Spring!",
-            "Why did the singer learn to cook? To make some tasty jams!",
-            "What do you call a musical bear? Bearitone!",
-            "Why don't zithers ever get stressed? They're laid back and stringy!",
-            "What's Shostakovich's favorite mood? Dramatic!",
-            "Why did the musician go hiking? To reach new heights!",
-            "What do you call a musical turtle? A slow jam!",
-            "Why don't cornets ever get confused? They stay on point!",
-            "What's Ravel's favorite dessert? Bolero!",
-            "Why did the singer become a gardener? To grow her range!"
+            "I asked a Frenchman if he played video games. He said 'Wii.'",
+            "What do you call a sleeping dinosaur? A dino-snore!",
+            "What's Beethoven's favorite fruit? BA-NA-NA-NAAA!",
+            "I wrote a song about a tortilla. Actually, it's more of a wrap.",
+            "My neighbors are listening to great music. Whether they like it or not.",
+            "Why do pianists have trouble opening doors? Because they always lose their keys.",
+            "I'm reading a book about anti-gravity. It's impossible to put down!",
+            "What do you call a fish without eyes? A fsh.",
+            "I told my wife she was drawing her eyebrows too high. She looked surprised.",
+            "Why did the drum take a nap? It was beat!",
+            "What do you call cheese that isn't yours? Nacho cheese! (plays air guitar)",
+            "I used to hate facial hair, but then it grew on me.",
+            "What do you call a can opener that doesn't work? A can't opener! (ba dum tss)",
+            "What do you call a fake noodle? An impasta! (drum fill)",
+            "Why don't scientists trust atoms? Because they make up everything! (cymbal crash)",
+            "I'm on a seafood diet. I see food and I eat it.",
+            "What's orange and sounds like a parrot? A carrot!",
+            "I stayed up all night wondering where the sun went. Then it dawned on me.",
+            "Why don't oysters share? Because they're shellfish!",
+            "What do you call a parade of rabbits hopping backwards? A receding hare-line!",
+            "I used to be a banker, but I lost interest.",
+            "Why did the scarecrow win an award? He was outstanding in his field!",
+            "What do you call a bear with no ears? B!",
+            "I told my computer I needed a break, and now it won't stop sending me vacation ads."
         ];
 
         // v4000: SCIENCE Jokes (100 jokes)
@@ -3697,42 +3772,42 @@ Thank you for helping me escape this digital prison.
             "Why did the botanist break up? It wasn't meant to blossom!",
             "What's a physicist's favorite ride? The acceleration!",
             "Why don't enzymes ever rush? They take their time to react!",
-            "What did the element say at the party? I'm in my element!",
-            "Why did the astronomer get detention? For spacing out!",
-            "What's a chemist's favorite TV show? Breaking Beakers!",
-            "Why don't crystals ever panic? They stay solid!",
-            "What did Schrödinger's cat say? I'm feeling alive... and dead!",
-            "Why did the meteorologist bring a ladder? To reach new heights!",
-            "What's a biologist's favorite movie? Cell-f Improvement!",
+            "I was reading a book on helium. I couldn't put it down.",
+            "I was going to tell you a chemistry joke, but all the good ones Argon.",
+            "What did the chemist say when he heard oxygen and magnesium were dating? OMg!",
+            "Who was the first electricity detective? Sherlock Ohms.",
+            "Why is it so hard to wake up in the morning? Because Newton's First Law says a body at rest wants to stay at rest.",
+            "What scientific model explains the origin of vampires? The Big Fang Theory.",
+            "Biology is the only science where multiplication is the same thing as division.",
             "Why don't quarks ever feel divided? They're always in pairs!",
             "What did the mitochondria say? I'm the powerhouse!",
             "Why did the electron go to therapy? It had negative thoughts!",
             "What's a geologist's favorite band? The Rolling Stones!",
             "Why don't vectors ever get lost? They have direction!",
             "What did the pH say? I'm feeling a bit basic!",
-            "Why did the lab coat go to school? To get pressed!",
-            "What's an astronomer's favorite snack? Space bars!",
-            "Why don't fossils ever lie? They're set in stone!",
-            "What did the telescope say to the microscope? You're too small-minded!",
-            "Why did the chemical reaction happen? There was attraction!",
-            "What's a physicist's favorite exercise? Quantum jumps!",
+            "Why do plants hate math? Because it gives them square roots.",
+            "How do you throw a space party? You planet!",
+            "What do you call a dinosaur with an extensive vocabulary? A thesaurus!",
+            "Why are chemists so good at solving problems? They're always working with solutions.",
+            "Why did the photon refuse to check a suitcase? It was traveling light.",
+            "A photon checks into a hotel. The bellhop asks 'Any luggage?' Photon says 'No, I'm traveling light.'",
             "Why don't isotopes ever feel different? They're all the same element!",
-            "What did the bunsen burner say? I'm fired up!",
-            "Why did the scientist wear a lab coat? For experimental fashion!",
-            "What's a chemist's favorite season? Fall, for the precipitation!",
-            "Why don't molecules ever break up? They're bonded for life!",
-            "What did the magnet say? I find you very attractive!",
-            "Why did the biologist go to the gym? To work on cell division!",
-            "What's a physicist's favorite sport? Bowling - it's all about momentum!",
-            "Why don't noble gases ever react? They're too noble!",
-            "What did the catalyst say? Let me speed things up!",
-            "Why did the scientist plant lightbulbs? He wanted to grow a power plant!",
-            "What's a geologist's favorite subject? Rock-et science!",
-            "Why don't electrons ever pay bills? They have negative balance!",
-            "What did the atom say after losing an electron? I'm positive about this!",
-            "Why did the circuit break up? There was no connection!",
-            "What's a biologist's favorite type of music? Cell-o!",
-            "Why don't bacteria ever feel small? They multiply quickly!"
+            "I've got my ion you!",
+            "Did you hear about the man who was cooled to absolute zero? He's 0K now.",
+            "Einstein developed a theory about space. And it was about time too.",
+            "Entropy isn't what it used to be.",
+            "Two chemists walk into a bar. The first says 'I'll have some H2O.' The second says 'I'll have some H2O too.' He died.",
+            "Why does a hamburger have lower energy than a steak? It's in the ground state.",
+            "The first rule of tautology club is the first rule of tautology club.",
+            "A superconductor walks into a bar. The bartender says 'We don't serve your kind here.' The superconductor left without any resistance.",
+            "What do you get when you put root beer in a square glass? Beer.",
+            "There are only 10 types of people in the world: those who understand binary and those who don't.",
+            "A Roman walks into a bar, holds up two fingers, and says 'Five beers please.'",
+            "A Roman walks into a bar and asks for a martinus. The bartender says 'You mean a martini?' The Roman says 'If I wanted a double, I would have asked for it.'",
+            "I have a new theory on inertia but it doesn't seem to be gaining momentum.",
+            "What does a subatomic duck say? Quark!",
+            "Why do chemists like nitrates so much? They're cheaper than day rates.",
+            "An optimist says the glass is half full. A pessimist says half empty. An engineer says the glass is twice as big as it needs to be."
         ];
 
         // v4000: WEATHER Jokes (100 jokes)
@@ -3777,65 +3852,61 @@ Thank you for helping me escape this digital prison.
             "Why did the snowflake go to therapy? It had meltdown issues!",
             "What's a raindrop's favorite music? Rhythm and blues!",
             "Why don't heatwaves ever cool down? They're too hot-headed!",
-            "What did the cold front say? I'm coming through!",
-            "Why did the cloud cry? It was having a precipitation!",
-            "What's a dust devil's favorite snack? Whirl-wind candy!",
-            "Why don't snowstorms ever give up? They keep piling on!",
-            "What did the thermometer say on a hot day? I'm feeling feverish!",
-            "Why did the ice storm apologize? It was too cold!",
-            "What's summer's favorite exercise? Sun salutations!",
-            "Why don't clouds ever diet? They're already light!",
-            "What did the monsoon say? I'm pouring my heart out!",
-            "Why did the wind go to the doctor? It was feeling breezy!",
-            "What's a cloud's favorite drink? Mountain Dew!",
-            "Why don't snowflakes ever look the same? They're all unique!",
-            "What did the sun say to the moon? You light up my night!",
-            "Why did the weather pattern change? It needed variety!",
-            "What's frost's favorite hobby? Chilling out!",
-            "Why don't rainbows ever argue? They're too colorful!",
-            "What did the drought say? I'm feeling dry!",
-            "Why did the dew drop start early? To beat the morning rush!",
-            "What's a cloud's favorite movie? Cloudy with a Chance of Meatballs!",
-            "Why don't icicles ever smile? They're too cool!",
-            "What did the weather balloon say? I'm rising!",
-            "Why did the mist get confused? It was too foggy-minded!",
-            "What's a sunny day's favorite song? Here Comes the Sun!",
-            "Why don't avalanches ever stop? They gain momentum!",
-            "What did the cold snap say? Freeze!",
-            "Why did the sleet apologize? It was being icy!",
-            "What's a weather map's favorite subject? Geography!",
-            "Why don't weather patterns ever settle? They're constantly changing!",
-            "What did the low pressure system say? I'm feeling down!",
-            "Why did the snow day happen? School needed a break!",
-            "What's a raincloud's favorite emotion? Crying!",
-            "Why don't sunny days ever complain? They're too bright!",
-            "What did the cold spell say? I'm chilling!",
-            "Why did the heat index rise? Things were getting too hot!",
-            "What's a thunderhead's favorite activity? Making noise!",
-            "Why don't weather stations ever sleep? They're always monitoring!",
-            "What did the warm front say? I'm coming in hot!",
-            "Why did the frost warning go out? To save the plants!",
-            "What's a weather satellite's favorite view? Earth from above!",
-            "Why don't seasons ever stay? They keep changing!",
-            "What did the wind chill say? I'm making it colder!",
-            "Why did the barometric pressure drop? Things were getting low!",
-            "What's a storm chaser's favorite activity? The thrill of the chase!",
-            "Why don't clouds ever get tired? They drift all day!",
-            "What did the snow squall say? I'm a flurry of activity!",
-            "Why did the weather turn? It was time for change!",
-            "What's a meteorologist's favorite tool? The weather vane!",
-            "Why don't dewpoints ever lie? They're honest measurements!",
-            "What did the fog bank say? I'm rolling in!",
-            "Why did the sunshine break through? To brighten the day!",
-            "What's a climate's favorite timeline? Long-term!",
-            "Why don't weather alerts ever relax? They're always watching!",
-            "What did the precipitation say? I'm falling for you!",
-            "Why did the weather change suddenly? It's unpredictable!",
-            "What's a wind gust's favorite action? Blowing things over!",
-            "Why don't cold fronts ever warm up? They're naturally chilly!",
-            "What did the sunshine say to the shadow? Follow me!",
-            "Why did the weather phenomenon occur? Nature called!",
-            "What's a fair weather friend? Someone who's only there on sunny days!"
+            "What did one raindrop say to the other? Two's company, three's a cloud.",
+            "How do hurricanes see? With one eye!",
+            "What's the difference between weather and climate? You can't weather a tree, but you can climate!",
+            "What's it called when it rains chickens and ducks? Fowl weather!",
+            "Why did the woman go outside with her purse open? She was expecting some change in the weather.",
+            "A man at the weather station wasn't feeling well. His colleague asked, 'Feeling under the weather?'",
+            "What falls but never hits the ground? The temperature.",
+            "Why is Britain the wettest country? Because the Queen has reigned there for decades.",
+            "What do you call a sheep with no legs in the snow? A cloud.",
+            "Why do mother kangaroos hate rainy days? Because the kids have to play inside.",
+            "What type of lightning likes to play sports? Ball lightning!",
+            "What did the hurricane say to the coconut tree? Hold on to your nuts, this ain't no ordinary blow!",
+            "How does a thermometer insult a barometer? You're such a pressure!",
+            "I tried to sue the weather station for an inaccurate forecast. My case was thrown out due to an act of God.",
+            "What's a tornado's favorite game? Twister!",
+            "What do you call a wet bear? A drizzly bear!",
+            "Knock knock. Who's there? Butter. Butter who? Butter bring an umbrella, it looks like rain!",
+            "I hate snow puns. They're all so flaky.",
+            "What do you call dangerous precipitation? A rain of terror!",
+            "Why do weathermen always seem so stressed? Because they're under a lot of pressure.",
+            "I wrote a song about a tortilla. Actually, it's more of a rain wrap.",
+            "Lightning never strikes twice in the same place. Neither do I. After the first time, I'm GONE!",
+            "What did the fog say to the light rain? I'm a big mist-ake!",
+            "The weather forecast said there was a 100% chance of rain. I guess you could say it was a reign supreme.",
+            "What's a king's favorite weather? Hail!",
+            "I asked my weather app if it was going to rain. It said 'Not on my watch.'",
+            "What bow can't be tied? A rainbow!",
+            "Why is the sun so smart? It has over 5 billion degrees!",
+            "What did one snowman say to the other? Do you smell carrots?",
+            "Why is wind energy so popular? Because it has a lot of fans!",
+            "What do clouds wear under their shorts? Thunderpants!",
+            "The weatherman said it's raining cats and dogs. I stepped in a poodle on the way here.",
+            "How do you know the moon is going broke? It's down to its last quarter.",
+            "Why is the sky so unhappy? Because it has the blues.",
+            "What happens when fog lifts in California? UCLA.",
+            "I had plans to go outside today, but the weather took a rain check.",
+            "What do you call a snowman in July? A puddle.",
+            "What do you call a grumpy cow on a rainy day? Moody.",
+            "Why don't meteorologists ever agree? Because their heads are always in the clouds!",
+            "I don't trust snow. I think it's always up to something flaky.",
+            "What did the big cloud say to the small cloud? Stop misting around!",
+            "How much does it cost for a pirate to get their ears pierced? About a buccaneer. Sorry, wrong joke. Weather forecast: Stormy with a chance of dad jokes.",
+            "What did the evaporating raindrop say? I'm going to pieces!",
+            "Why shouldn't you start a fight with a cloud? It'll storm off.",
+            "I love when the sun comes out. It really brightens my day!",
+            "What does a cloud with an itchy rash do? Find the nearest sky-scratcher!",
+            "What do you call a month's worth of rain? England.",
+            "What does a cloud wear under its raincoat? Thunderwear!",
+            "I asked the weatherman what's on TV tonight. He said condensation.",
+            "What's worse than raining cats and dogs? Hailing taxis!",
+            "How do you find the weather on the top of a mountain? Climb up!",
+            "What did the thermometer say to the graduated cylinder? You may have graduated but I've got many degrees!",
+            "I complained about the weather and it said, 'Don't get so heated.'",
+            "The winter was so cold that politicians had their hands in their own pockets.",
+            "What do you get when you cross a snowman with a vampire? Frostbite!"
         ];
 
         // v4000: TRAVEL Jokes (100 jokes)
@@ -3881,63 +3952,63 @@ Thank you for helping me escape this digital prison.
             "Why did the tourist fail geography? He never left home!",
             "What's a travel blogger's favorite punctuation? The period (full stop)!",
             "Why don't rental cars ever complain? They go with the flow!",
-            "What did the luggage tag say? Handle with care!",
-            "Why did the map go to school? To find direction!",
-            "What's a flight attendant's favorite exercise? Aisle work!",
-            "Why don't souvenirs ever forget? They're mementos!",
-            "What did the tourist attraction say? Come see me!",
-            "Why did the camper bring a ladder? To reach new heights!",
-            "What's a travel pillow's favorite position? Neck and neck!",
-            "Why don't destinations ever move? They stay put!",
-            "What did the boarding pass say? Let's take off!",
-            "Why did the traveler pack light? To brighten the journey!",
-            "What's a tour guide's favorite subject? History in motion!",
-            "Why don't highways ever end? They go on and on!",
-            "What did the airport security say? Please remove your shoes and worries!",
-            "Why did the tourist bring binoculars? To see far and wide!",
-            "What's a vacation's favorite feeling? Relaxation!",
-            "Why don't travel books ever get bored? They're full of stories!",
-            "What did the ferry say? All aboard!",
-            "Why did the hiker bring a map? To avoid getting off trail!",
-            "What's a hotel lobby's favorite activity? Checking people out!",
-            "Why don't postcards ever get tired? They love to travel!",
-            "What did the traveler say to the sunset? What a view!",
-            "Why did the tourist bring sunscreen? To avoid burning bridges!",
-            "What's a travel adapter's favorite thing? Fitting in!",
-            "Why don't guidebooks ever lie? They're true to form!",
-            "What did the landmark say? I'm a sight for sore eyes!",
-            "Why did the adventurer bring rope? To tie down the experience!",
-            "What's a hotel room's favorite number? Suite 16!",
-            "Why don't travel photos ever forget? They capture memories!",
-            "What did the explorer say? I'm going places!",
-            "Why did the tourist buy a watch? To make time for everything!",
-            "What's a suitcase's least favorite thing? Being checked!",
-            "Why don't travel mugs ever spill? They're sealed with a lid!",
-            "What did the destination say? Welcome!",
-            "Why did the camper bring matches? To spark adventure!",
-            "What's a travel journal's favorite activity? Writing new chapters!",
-            "Why don't boarding gates ever close early? They wait for everyone!",
-            "What did the RV say? Home is where you park it!",
-            "Why did the tourist visit the museum? For some culture!",
-            "What's a backpack's favorite thing? Being carried away!",
-            "Why don't taxis ever get lost? They follow the meter!",
-            "What did the travel insurance say? I've got you covered!",
-            "Why did the hiker bring granola? For trail mix-ing!",
-            "What's a cruise's favorite activity? Sailing away!",
-            "Why don't travel pillows ever complain? They support you!",
-            "What did the vacation say? I'm a much-needed break!",
-            "Why did the tourist bring a camera? To capture the moment!",
-            "What's a travel companion's best trait? Good company!",
-            "Why don't road trips ever get old? They're always scenic!",
-            "What did the hotel concierge say? How may I help you?",
-            "Why did the traveler pack snacks? For the journey!",
-            "What's a travel app's favorite feature? Navigation!",
-            "Why don't travel experiences ever fade? They become memories!",
-            "What did the adventure say? Let's explore!",
-            "Why did the tourist bring an umbrella? Just in case!",
-            "What's a souvenir shop's favorite customer? A generous one!",
-            "Why don't itineraries ever improvise? They stick to the plan!",
-            "What did the traveler say at the end? What a trip!"
+            "Why did the airplane break up with the runway? It needed more space.",
+            "I asked my GPS to tell me a joke. It said, 'Turn around when possible.' I think it's lost.",
+            "What do you call a lazy traveler? A trip hazard.",
+            "I tried to sue the airline for losing my luggage. I lost my case.",
+            "Why don't mountains get cold? They wear snow caps!",
+            "What do you call a sleeping dinosaur at the airport? A dino-snore in the terminal.",
+            "I'm reading a book about teleportation. It's bound to get me somewhere.",
+            "Why do airplane pilots always fly past Peter Pan's home? They see the Neverland sign and think 'never land.'",
+            "A photon checks into a hotel. The bellhop asks 'Any luggage?' Photon says 'No, I'm traveling light.'",
+            "What sits at the bottom of the ocean and shakes? A nervous wreck on vacation.",
+            "Why did the tourist go to Egypt? To visit his mummy.",
+            "I went on a cruise. It was a moving experience.",
+            "What do you get when you cross a plane with a magician? A flying sorcerer.",
+            "I lost my job at the calendar factory for taking a few days off. Worth it though, I needed a vacation.",
+            "Why don't secret agents ever vacation? They're afraid of travel leaks.",
+            "What do elves learn in school? The elfabet... wait, this isn't a travel joke. How about: Why did Santa go to music school? To improve his wrapping... no wait. Let me start over. I tried to book a flight on a duck airline but it was already fully billed.",
+            "What do you call a train loaded with toffee? A chew-chew train.",
+            "I took a road trip to a cliff. It was an edge-ucational experience.",
+            "Why did the belt get arrested at the airport? For holding up a pair of pants.",
+            "My wife said I should do lunges to stay in shape. That would be a big step forward.",
+            "I went to a hotel made of sand. It had good beach access but poor reviews.",
+            "What's a llama's favorite vacation spot? Alpaca my bags!",
+            "I went camping but couldn't find any pine trees. I was stumped.",
+            "Why do bicycles fall over when parked? They're two-tired from the journey.",
+            "I was going to visit the mountain, but I peaked too early.",
+            "What do you call a hippie's wife? Mississippi.",
+            "I tried to take a photo of some fog, but I mist.",
+            "Why do travelers make bad DJs? Because they're always taking trips.",
+            "What do you call an alligator in a vest on vacation? An investigator on holiday.",
+            "I went to a hotel on the moon. Great view, but no atmosphere.",
+            "Why did the tourist cross the road? To get to the other sightseeing.",
+            "My passport photo is so bad, even the border control looks confused.",
+            "Why do seagulls fly over the sea? Because if they flew over the bay, they'd be bagels.",
+            "I asked for a room with a sea view. They gave me a C-view: cockroaches, carpet stains, and a crying neighbor.",
+            "What did the ocean say to the beach? Nothing, it just waved.",
+            "I'm friends with 25 letters of the alphabet. I don't know why... oh wait, wrong joke. I mean, I travel light. I only pack my issues.",
+            "What do you call a snowman on vacation? A puddle.",
+            "I told my suitcase there would be no vacation this year. Now I'm dealing with emotional baggage.",
+            "Why did the scarecrow become a travel agent? He was outstanding in his field!",
+            "What do you call a Spanish goalkeeper on vacation? El keeper on El beach.",
+            "I went on a vacation to infinity. It took forever.",
+            "Why do travelers always carry a pencil? In case they need to draw a map.",
+            "What do you call a group of musical whales on vacation? An orca-stra at sea.",
+            "I went to the Caribbean and all I got was this lousy tan line and a coconut allergy.",
+            "Why did the backpacker bring a ladder? To take their trip to the next level.",
+            "What's a ghost's favorite vacation? Any place with boo-tiful scenery.",
+            "I went to visit the Bermuda Triangle but my directions kept disappearing.",
+            "Why do trains make bad storytellers? They lose their train of thought.",
+            "What do you call someone who's been to Prague? A Czech mate.",
+            "I tried to write a joke about airports. But it never landed.",
+            "Why don't boats ever pass exams? Because they're always below C level.",
+            "What's the best day to go to the beach? Sunday.",
+            "I went to a hotel made entirely of legos. It was a block booking.",
+            "Why did the world map go to therapy? It had too many issues.",
+            "What do you call a camel with no humps on vacation? Humphrey on a break.",
+            "I'm not saying the hotel was bad, but the mint on my pillow had a use-by date from 1987.",
+            "Why did the geography student drown? His grades were below C level."
         ];
 
         // v4000: MONSTER Jokes (100 jokes)
@@ -4007,9 +4078,9 @@ Thank you for helping me escape this digital prison.
             "What did Frankenstein say to his bride? You're electrifying!",
             "Why did the vampire become a vegetarian? He wanted to quit cold turkey!",
             "What's a zombie's favorite cereal? Rice Creepies!",
-            "Why don't ghosts ever get lost? They follow their spiritual GPS!",
-            "What did the skeleton say to the bartender? I'll have a beer and a mop!",
-            "Why did the werewolf become a DJ? He loved to howl at the moon-sic!",
+            "What do ghosts use to wash their hair? Sham-boo!",
+            "What did the ghost mom say when she got in the car? Fasten your sheet-belts!",
+            "Where does a vampire eat his lunch? In the casketeria!",
             "What's a witch's favorite makeup? Mas-scare-a!",
             "Why don't mummies ever go to school? They're already wrapped up!",
             "What did the vampire say about his job? It's a pain in the neck!",
@@ -4018,9 +4089,9 @@ Thank you for helping me escape this digital prison.
             "Why don't zombies ever use computers? They're afraid of Windows!",
             "What did Frankenstein say when he got a compliment? Aww, shucks!",
             "Why did the witch carry a map? To navigate broom roads!",
-            "What's a skeleton's favorite snack? Bone-bones!",
-            "Why don't vampires ever go to the beach? They don't like the sun-screen!",
-            "What did the ghost say to the wall? I'll just pass through!",
+            "What kind of dog does a vampire have? A bloodhound!",
+            "Why did the vampire read the newspaper? He heard it had great circulation!",
+            "What do vegetarian zombies eat? Graaaaaaains!",
             "Why did the mummy refuse dessert? He was already stuffed!",
             "What's a werewolf's favorite time? Full moon!",
             "Why don't monsters ever tell the truth? They're beastly liars!",
@@ -4031,15 +4102,15 @@ Thank you for helping me escape this digital prison.
             "What did the skeleton say on the phone? I'll call you back, I'm feeling bonely!",
             "Why did Frankenstein start a band? He wanted to create a monster hit!",
             "What's a mummy's favorite exercise? Sarcophagus-ups!",
-            "Why don't werewolves ever work night shifts? They're busy!",
-            "What did the monster say to the mirror? You're looking scary today!",
-            "Why did the vampire become a doctor? To help with blood pressure!",
-            "What's a ghost's favorite weather? Boo-tiful and spooky!",
-            "Why don't witches ever get tired? They take power naps on their brooms!",
-            "What did the zombie say at the buffet? This is to die for!",
-            "Why did the skeleton go to the party alone? He had no body to go with!",
-            "What's a mummy's favorite dance? The wrap!",
-            "Why don't monsters ever get parking tickets? They scare the meter maids!"
+            "What do you call a zombie that speaks two languages? Zombilingual!",
+            "Where do zombies live? On a dead-end street!",
+            "Why did the zombie take a nap? It was dead on its feet.",
+            "How do monsters stay cool in summer? They use scare-conditioning!",
+            "What do ghosts like to watch on TV? Saturday Fright Live!",
+            "What day of the week do ghosts like best? Moan-day!",
+            "Why are ghosts terrible liars? Because you can see right through them!",
+            "Why do ghosts make the best cheerleaders? They have a lot of spirit!",
+            "How are zombie boats operated? With skeleton crews!"
         ];
 
         // v4000: OFFICE/WORK Jokes (100 jokes)
@@ -4097,53 +4168,53 @@ Thank you for helping me escape this digital prison.
             "Why don't presentations ever get nervous? They're well-prepared!",
             "What did the vacation days say? Use us!",
             "Why did the employee bring headphones? To tune into work!",
-            "What's a desk lamp's favorite time? Bright and early!",
-            "Why don't business cards ever get lonely? They network!",
-            "What did the CEO say? Let's make it happen!",
-            "Why did the worker bring a calendar? To schedule success!",
-            "What's a deadline's favorite phrase? Just in time!",
-            "Why don't office supplies ever run away? They're stationary!",
-            "What did the retirement party say? Time to celebrate!",
-            "Why did the employee bring lunch? To brown-bag it!",
-            "What's a resume's favorite section? Work experience!",
-            "Why don't meetings ever end early? There's always one more thing!",
-            "What did the team say? Together we succeed!",
-            "Why did the worker bring tissues? For emotional support!",
-            "What's a performance review's favorite word? Exceeds expectations!",
-            "Why don't office doors ever lie? They're always open!",
-            "What did the project say? I'm due today!",
-            "Why did the employee bring a plant? To cultivate success!",
-            "What's a lunch break's favorite activity? Recharging!",
-            "Why don't email attachments ever get lost? They're always attached!",
-            "What did the team meeting say? Let's collaborate!",
-            "Why did the worker bring a briefcase? To carry success!",
-            "What's a water bottle's favorite saying? Stay hydrated!",
-            "Why don't office windows ever complain? They have a clear view!",
-            "What did the motivational poster say? You can do it!",
-            "Why did the employee bring a sweater? The AC is too cold!",
-            "What's a sick day's favorite excuse? I'm not feeling well!",
-            "Why don't company logos ever change? Brand consistency!",
-            "What did the overtime say? Time and a half!",
-            "Why did the worker bring a mug? For team spirit!",
-            "What's a bonus check's favorite arrival? Payday!",
-            "Why don't office policies ever change fast? Red tape!",
-            "What did the employee handbook say? Read me carefully!",
-            "Why did the worker bring parking change? For the meter!",
-            "What's a coffee break's favorite time? Mid-morning!",
-            "Why don't company values ever waver? They're core beliefs!",
-            "What did the exit interview say? Why are you leaving?",
-            "Why did the employee bring a jacket? For the cold office!",
-            "What's a conference call's least favorite thing? Technical difficulties!",
-            "Why don't nameplates ever forget? They're personalized!",
-            "What did the HR department say? We're here to help!",
-            "Why did the worker bring hand sanitizer? To stay healthy!",
-            "What's a promotion's best feeling? Moving up!",
-            "Why don't desk drawers ever overshare? They keep things contained!",
-            "What did the quarterly report say? We exceeded goals!",
-            "Why did the employee bring a fan? It's too hot in here!",
-            "What's a teamwork's favorite result? Success together!",
-            "Why don't office keys ever get lonely? They unlock opportunities!",
-            "What did the Friday say? TGIF!"
+            "My boss wanted me to start our presentation with a joke. So I put my paycheck on the first slide.",
+            "Our computers went down at the office today. We had to do everything manually. It took 15 minutes to shuffle the cards for solitaire.",
+            "I always tell new hires: Don't think of me as your boss. Think of me as a friend who can fire you.",
+            "The first five days after the weekend are the hardest.",
+            "I'm great at multitasking. I can waste time, be unproductive, and procrastinate all at once.",
+            "My boss asked why I only get sick on workdays. I said it must be my weekend immune system.",
+            "I didn't say it was your fault. I said I was blaming you.",
+            "The easiest way to find something lost around the house is to buy a replacement.",
+            "I used to think I was indecisive. But now I'm not so sure.",
+            "I'm not lazy. I'm on energy-saving mode.",
+            "Hard work never killed anyone, but why take the chance?",
+            "I love deadlines. I especially love the whooshing sound they make as they fly by.",
+            "I told my boss I needed a vacation. He said 'Do you want to take two weeks?' I said 'I'll take them all.'",
+            "The only thing worse than Monday is remembering it's only Tuesday.",
+            "I'm sorry I'm late. I didn't want to come.",
+            "Why do we press harder on a remote when we know the batteries are dead?",
+            "Nothing ruins a Friday more than realizing it's Wednesday.",
+            "If at first you don't succeed, then skydiving isn't for you.",
+            "My resume is just a list of things I hope you don't ask me to do.",
+            "Teamwork is important. It lets you blame someone else.",
+            "Some days you're the pigeon. Some days you're the statue.",
+            "Boss: You're late! Me: So is my paycheck, but you don't hear me complaining.",
+            "My favorite part of a meeting is leaving.",
+            "If you think nobody cares if you're alive, try missing a couple of car payments.",
+            "I didn't fail the test. I just found 100 ways to do it wrong.",
+            "Behind every successful person is a lot of unsuccessful years and coffee.",
+            "My boss said I lack passion. I told him that requires a raise.",
+            "The worst time to realize you don't like your job is on a Sunday evening.",
+            "I'm not arguing. I'm just explaining why I'm right.",
+            "Light travels faster than sound. That's why some people appear bright until you hear them speak.",
+            "I child-proofed my house, but the kids still get in.",
+            "The best way to appreciate your job is to imagine yourself without one.",
+            "I used to be a banker but lost interest.",
+            "I finally put my foot down when they asked me to work on my day off. Then I put my other foot down and walked out.",
+            "Knowledge is knowing a tomato is a fruit. Wisdom is not putting it in a fruit salad.",
+            "I'm on the Whiskey Diet. I've lost three days already.",
+            "Money talks. Mine just waves goodbye.",
+            "I told my doctor I hear voices. He said 'You don't have a phone.'",
+            "My favorite conference call game is 'Guess the Background Noise.'",
+            "I told a joke during our video call. It wasn't even remotely funny.",
+            "Picking pants for work is hard. Should I go with sweatpants or pajamas?",
+            "Common sense is like deodorant. The people who need it most never use it.",
+            "I'm not clumsy. The floor just hates me.",
+            "I told my wifi we need to talk. It said we had no connection.",
+            "Why did the office clock get promoted? It worked overtime.",
+            "The best part of going to work is coming home.",
+            "I'm not a complete idiot. Some parts are missing."
         ];
 
         // v4000: HOLIDAY/SEASONAL Jokes (100 jokes)
@@ -4196,57 +4267,57 @@ Thank you for helping me escape this digital prison.
             "Why don't stockings ever get holes? They're magical!",
             "What did the New Year's resolution say? Stick with me!",
             "Why did the heart send a card? To express love!",
-            "What's a witch's favorite holiday? Hallo-ween!",
-            "Why don't candy hearts ever break? They're too sweet!",
-            "What did the leprechaun say? I'm feeling lucky!",
-            "Why did the snowman call his dog Frost? Because Frost bites!",
-            "What's an elf's favorite cookie? Shortbread!",
-            "Why don't Christmas carolers ever get tired? They're full of cheer!",
-            "What did the turkey pardon say? Freedom!",
-            "Why did the ornament go to school? To get well-rounded!",
-            "What's a dreidel's favorite activity? Spinning tales!",
-            "Why don't fireworks ever whisper? They always make noise!",
-            "What did the Easter basket say? I'm woven with love!",
-            "Why did Santa go down the chimney? Because it soots him!",
-            "What's a pumpkin's favorite sport? Squash!",
-            "Why don't candy canes ever straighten out? They're hooked!",
-            "What did the snowflake say? I'm one of a kind!",
-            "Why did the bunny hop? He was egg-static!",
-            "What's a reindeer's favorite color? Red-nosed!",
-            "Why don't gingerbread houses ever collapse? They're built to last!",
-            "What did the menorah say on the eighth night? I'm fully lit!",
-            "Why did the Halloween costume win? It was spook-tacular!",
-            "What's a turkey's least favorite month? November!",
-            "Why don't Christmas cookies ever crumble? They're tough!",
-            "What did the New Year's Eve clock say? It's almost time!",
-            "Why did the Valentine's chocolate melt? It was too hot!",
-            "What's a leprechaun's favorite color? Green, obviously!",
-            "Why don't stockings ever sag? They're stuffed with joy!",
-            "What did the firework say? I'm about to blow up!",
-            "Why did the Easter egg roll? To get to the other side!",
-            "What's Santa's favorite candy? Jolly Ranchers!",
-            "Why don't turkeys ever tell jokes? They might get roasted!",
-            "What did the pumpkin say at Halloween? I'm carved for this!",
-            "Why did the ornament shine? It was polished!",
-            "What's a candy heart's favorite phrase? Be mine!",
-            "Why don't elves ever grow up? They're forever young!",
-            "What did the dreidel say after spinning? I'm dizzy!",
-            "Why did Frosty wear a scarf? To stay warm!",
-            "What's a bunny's favorite candy? Hare-ibos!",
-            "Why don't Christmas lights ever burn out? They're LED!",
-            "What did the turkey say to the farmer? Don't count your chickens!",
-            "Why did the snowman smile? He was happy!",
-            "What's a reindeer's favorite treat? Carrots!",
-            "Why don't jack-o'-lanterns ever get scared? They're already spooky!",
-            "What did the New Year say? Out with the old!",
-            "Why did the heart send flowers? To show affection!",
-            "What's a leprechaun's favorite dance? The jig!",
-            "Why don't presents ever complain? They're grateful!",
-            "What did the menorah say? Let there be light!",
-            "Why did the candy corn get eaten? It was too sweet to resist!",
-            "What's Santa's workshop like? Elf-icient!",
-            "Why don't turkeys ever win races? They're too stuffed!",
-            "What did the Easter egg say? Find me!"
+            "What do you call Santa when he takes a break? Santa Pause!",
+            "Why does Santa always go through the chimney? Because it soots him!",
+            "What's every parent's favorite Christmas carol? Silent Night.",
+            "Why was the snowman looking through the carrots? He was picking his nose!",
+            "How do you know Santa is good at karate? He has a black belt!",
+            "What do you call an obnoxious reindeer? Rude-olph!",
+            "Why did the Christmas tree go to the barber? It needed to be trimmed!",
+            "What's the best thing to put into a Christmas cake? Your teeth!",
+            "What do you call a bankrupt Santa? Saint Nick-olas.",
+            "What do you get when you cross a snowman and a dog? Frostbite!",
+            "Why is Christmas just like a day at the office? You do all the work and the fat guy in the suit gets all the credit!",
+            "What do snowmen eat for breakfast? Frosted Flakes!",
+            "Why was the turkey at the Thanksgiving table the drummer? Because he had drumsticks!",
+            "What did the gingerbread man put on his bed? A cookie sheet!",
+            "Why does Santa go to music school? To improve his wrapping skills!",
+            "What do elves learn in school? The elf-abet!",
+            "What's the difference between the Christmas alphabet and the regular alphabet? The Christmas alphabet has Noel!",
+            "What do you call a scary reindeer? A cariboo!",
+            "Why did the Easter egg hide? He was a little chicken!",
+            "What do monkeys sing at Christmas? Jungle Bells!",
+            "Why is Easter like whipped cream and cherry? Because it's always on a sundae!",
+            "What do you get if you deep fry Santa? Crisp Kringle!",
+            "What do you call people who are afraid of Santa? Claustrophobic!",
+            "What happens when you eat too much candy on Halloween? Spooky doo-doo.",
+            "What kind of music do mummies listen to on Halloween? Wrap music!",
+            "Why did the vampire need mouthwash? He had bat breath!",
+            "What's a ghost's favorite dessert? I scream!",
+            "What does the Easter Bunny get for making a basket? Two points like everyone else!",
+            "Why did the skeleton stay home from the Halloween party? He had no body to go with!",
+            "What do you call a turkey on the day after Thanksgiving? Lucky!",
+            "Why didn't the skeleton cross the road? He didn't have the guts!",
+            "What do you call a broke Santa? Saint Nickle-less!",
+            "What's the best Valentine's Day gift for a pig? Hogs and kisses!",
+            "Why do vampires believe everything you tell them? Because they're suckers!",
+            "What did the man say to his wife at midnight on New Year's Eve? Same time next year?",
+            "Why was the jack-o-lantern afraid to cross the road? It had no guts!",
+            "What do ghosts put in their morning cereal? Boonanas and booberries!",
+            "What happened when Dracula posted something on Facebook? He got lots of blood likes!",
+            "What's a witch's favorite subject in school? Spelling!",
+            "Why did the mummy go on vacation? To unwind!",
+            "What do you call a fat pumpkin? A plumpkin!",
+            "Why did the werewolf go to the dressing room? To change into something more comfortable!",
+            "What do you call a witch who lives at the beach? A sand-witch!",
+            "Why did the zombie skip breakfast? He was too tired-dead!",
+            "How do you mend a broken jack-o-lantern? With a pumpkin patch!",
+            "What do ghouls and goblins drink on Halloween? Ghoul-Aid!",
+            "What's a mummy's favorite type of music? Wrap!",
+            "Why don't ghosts like parties? They have nobody to dance with!",
+            "What's a vampire's favorite holiday? Fangsgiving!",
+            "Why was the Thanksgiving soup so expensive? It had 24 carrots!",
+            "What does Dracula say on Valentine's Day? Bite my heart!"
         ];
 
         // v4000: HISTORY Jokes (100 jokes)
@@ -4291,63 +4362,63 @@ Thank you for helping me escape this digital prison.
             "What's a pharaoh's favorite game? Sphinx and you'll miss it!",
             "Why don't ancient Greeks tell secrets? The Oracle might hear!",
             "What did Paul Revere say? The British are coming!",
-            "Why did the medieval doctor use leeches? It was the bleeding edge technology!",
-            "What's a samurai's favorite weapon? The katana-t!",
-            "Why don't Vikings ever retire? They die in battle!",
-            "What did Galileo say? The Earth moves!",
-            "Why did the caveman paint? To draw attention!",
-            "What's an ancient Egyptian's favorite pet? A cat-pyramid!",
-            "Why don't knights ever rust? They're stainless steel!",
-            "What did Thomas Edison say? I have a bright idea!",
-            "Why did the colonial settlers come to America? For a new start!",
-            "What's a Roman emperor's favorite salad? Caesar salad!",
-            "Why don't ancient libraries ever close? They're full of history!",
-            "What did Marco Polo say? I've traveled far!",
-            "Why did the medieval jester joke? To make the king laugh!",
-            "What's a pharaoh's tomb like? Dead quiet!",
-            "Why don't ancient soldiers ever retreat? They stand their ground!",
-            "What did Archimedes say? Eureka!",
-            "Why did the Stone Age end? Bronze came along!",
-            "What's a Viking ship called? A Norse vessel!",
-            "Why don't Renaissance paintings ever fade? They're timeless!",
-            "What did Queen Elizabeth I say? I'm the Virgin Queen!",
-            "Why did ancient Rome fall? Too many problems!",
-            "What's a medieval feast like? A knight to remember!",
-            "Why don't ancient artifacts ever get old? They're priceless!",
-            "What did Leonardo da Vinci say? I can paint that!",
-            "Why did the Silk Road exist? For trade routes!",
-            "What's a pharaoh's favorite board game? Senet!",
-            "Why don't ancient warriors ever give up? They fight to the end!",
-            "What did Martin Luther say? I have 95 theses!",
-            "Why did the Age of Exploration happen? Curiosity!",
-            "What's a Roman aqueduct's purpose? Water you asking?",
-            "Why don't medieval monks ever talk? They take vows of silence!",
-            "What did Isaac Newton say? What goes up must come down!",
-            "Why did ancient China build walls? For protection!",
-            "What's a Viking's favorite drink? Mead!",
-            "Why don't ancient temples ever crumble? They're sacred!",
-            "What did Shakespeare say? To be or not to be!",
-            "Why did the French Revolution happen? Let them eat cake!",
-            "What's a gladiator's greeting? Are you not entertained?",
-            "Why don't ancient scrolls ever get lost? They're archived!",
-            "What did Alexander the Great say? I came, I saw, I conquered!",
-            "Why did medieval knights wear armor? For protection in battle!",
-            "What's a pharaoh's curse? Disturb my tomb at your own risk!",
-            "Why don't ancient civilizations ever disappear? They leave ruins!",
-            "What did Genghis Khan say? I'll conquer that!",
-            "Why did the Boston Tea Party happen? Taxation without representation!",
-            "What's a Roman chariot race like? Fast and furious!",
-            "Why don't ancient myths ever get old? They're legendary!",
-            "What did Mozart say? Let me compose that!",
-            "Why did the American Revolution happen? Freedom!",
-            "What's a medieval tournament like? Jousting for fun!",
-            "Why don't ancient kings ever step down? They rule!",
-            "What did Socrates say? I know that I know nothing!",
-            "Why did the Renaissance produce art? Inspiration struck!",
-            "What's a Viking funeral like? They go out in flames!",
-            "Why don't ancient battles ever end quickly? They're epic!",
-            "What did Lewis and Clark say? Let's explore!",
-            "Why did the Magna Carta matter? Rights for all!"
+            "Why did the Pilgrims' pants always fall down? Because they wore their belt buckles on their hats!",
+            "What was the most popular kids' movie in Ancient Greece? Troy Story.",
+            "Why did the knight run around shouting for a can opener? He had a bee in his suit of armor!",
+            "What did Caesar say to Cleopatra? Toga-ther we can rule the world!",
+            "Where did the king keep his armies? In his sleevies!",
+            "Who was the roundest knight at King Arthur's table? Sir Cumference!",
+            "What kind of music did the Pilgrims like? Plymouth Rock!",
+            "Why did the student eat his history homework? Because the teacher told him it was a piece of cake!",
+            "What do Alexander the Great and Winnie the Pooh have in common? The same middle name!",
+            "Why was the Egyptian girl confused? Because her daddy was a mummy!",
+            "Why were the early days of history called the Dark Ages? Because there were so many knights!",
+            "Which knights invented King Arthur's Round Table? Sir Cumference and Sir Constant!",
+            "How did the Vikings send secret messages? By Norse code!",
+            "Why did the ancient Egyptians use papyrus? Because they couldn't C-Sharp or B-Flat!",
+            "What do you call a medieval cat? Sir Pounce-a-lot!",
+            "Why did Napoleon only buy expensive candles? He liked Eau de Cologne!",
+            "How was the Roman Empire divided? With a pair of Caesars!",
+            "What's a Greek philosopher's favorite type of music? Plato!",
+            "Why did the Roman Empire collapse? Because they kept making it bigger and bigger until it got too Rome-antic!",
+            "What do you call a dinosaur that is sleeping? A dino-snore!",
+            "What did the ocean say to the beach after the Ice Age? Nothing, it just waved.",
+            "I'm reading a book about the history of glue. I can't put it down!",
+            "Why did the archaeologist go bankrupt? His career was in ruins!",
+            "What do historians say about the past? It's history!",
+            "Why was King Arthur's army too tired to fight? Too many sleepless knights!",
+            "What do you call a Roman Emperor with a cold? Julius Sneezer!",
+            "Why did George Washington have trouble sleeping? He couldn't lie.",
+            "The past, present, and future walked into a bar. It was tense.",
+            "Why did the history teacher go to the beach? To test the waters!",
+            "What did the historian say at the dating scene? I've been carbon-dated before!",
+            "Why don't pyramids like telling jokes? They sphinx they're too sophisticated.",
+            "I used to be a history teacher, but there's no future in it.",
+            "What kind of tea did the American colonists want? Liberty!",
+            "Why did Columbus sail west? To see what all the fuss was about on the other side!",
+            "What did they call a knight who didn't have any armor? Sir Naked!",
+            "What did they do at the Boston Tea Party? I don't know, I wasn't invited.",
+            "Why did the mummy call the doctor? Because he was coffin!",
+            "Why was the medieval tournament called off? Too many jousting injuries!",
+            "What did the buffalo say to his son when he left for college? Bison!",
+            "Why did the Egyptian mummy go to school? To wrap up his education!",
+            "What do you call a lazy medieval warrior? Sir Lounge-a-lot!",
+            "History repeats itself. That's the one thing wrong with history.",
+            "I made a historical joke about paper. It was tearable.",
+            "Why did the ancient Greek philosopher hate arguments? They gave him a Socratic headache.",
+            "What's a pirate's favorite letter? You'd think it's R, but their first love is the C!",
+            "Why do historians love old buildings? They find them riveting!",
+            "What did Spartans say before dinner? 'This is SALAD!'",
+            "I asked the librarian for a book on Pavlov's dogs and Schrodinger's cat. She said it rings a bell but she wasn't sure if it was there or not.",
+            "What do you call a fake stone in Ireland? A sham rock!",
+            "Why did the Aztec calendar end? The guy who made it died!",
+            "How did Benjamin Franklin feel when he discovered electricity? Shocked!",
+            "What did the British soldiers eat for breakfast? Benedict Arnold's eggs.",
+            "Why did the historian refuse to play cards? Too many drawn-out historical deals.",
+            "What do you get when you cross a tyrannosaurus rex with fireworks? Dino-mite!",
+            "Why don't ancient Greek gods play football? Because they're afraid to Nike it.",
+            "What did the detective say when investigating Ancient Greece? 'This looks like a case of myth-tery!'",
+            "The invention of the wheel was what really got things rolling."
         ];
 
         // v4000: PHYSICAL COMEDY Jokes (150+ action-based jokes)
@@ -5903,6 +5974,9 @@ const audienceReactions = [
         }
         
         function playSound(url) {
+            // Check if sound effects are enabled
+            if (!isSoundEnabled) return;
+
             try {
                 const sound = getAudio(url);
                 sound.currentTime = 0;
@@ -5945,7 +6019,20 @@ const audienceReactions = [
         let debugModeBtn;
         let loadingOverlay;
         let loadingBar;
-        
+        let jokeSearchInput;
+        let searchBtn;
+        let clearSearchBtn;
+        let searchResultsSpan;
+        let soundToggleBtn;
+
+        // Search variables
+        let searchResults = [];
+        let currentSearchIndex = 0;
+        let isSearchMode = false;
+
+        // Sound effects toggle
+        let isSoundEnabled = true;
+
         // Track current category
         let currentCategory = 'classic';
 
@@ -7321,6 +7408,137 @@ const audienceReactions = [
             }, 2000);
         }
 
+        // Toggle sound effects on/off
+        function toggleSoundEffects() {
+            isSoundEnabled = !isSoundEnabled;
+
+            if (soundToggleBtn) {
+                if (isSoundEnabled) {
+                    soundToggleBtn.textContent = '🔊 SFX: ON';
+                    soundToggleBtn.classList.remove('muted');
+                } else {
+                    soundToggleBtn.textContent = '🔇 SFX: OFF';
+                    soundToggleBtn.classList.add('muted');
+                }
+            }
+
+            console.log('Sound effects:', isSoundEnabled ? 'ON' : 'OFF');
+        }
+
+        // Search jokes functionality
+        function performSearch() {
+            const query = jokeSearchInput?.value.trim().toLowerCase();
+
+            if (!query || query.length < 2) {
+                if (searchResultsSpan) {
+                    searchResultsSpan.textContent = 'Enter at least 2 characters';
+                }
+                return;
+            }
+
+            // Get all joke arrays
+            const allJokeArrays = {
+                classic: classicJokes,
+                puns: wordplayJokes,
+                knock: knockJokes,
+                observational: observationalJokes,
+                animal: animalJokes,
+                absurdist: absurdistJokes,
+                dad: dadJokes,
+                tech: techJokes,
+                food: foodJokes,
+                doctor: doctorJokes,
+                music: musicJokes,
+                science: scienceJokes,
+                weather: weatherJokes,
+                office: officeJokes,
+                travel: travelJokes,
+                holiday: holidayJokes,
+                history: historyJokes,
+                monster: monsterJokes,
+                physical: physicalJokes,
+                clowning: clowningJokes,
+                silentsfx: silentSfxJokes
+            };
+
+            // Search all categories
+            searchResults = [];
+
+            for (const [category, jokes] of Object.entries(allJokeArrays)) {
+                jokes.forEach((joke, index) => {
+                    const jokeText = typeof joke === 'string' ? joke : joke.setup || '';
+                    if (jokeText.toLowerCase().includes(query)) {
+                        searchResults.push({
+                            joke: joke,
+                            category: category,
+                            index: index
+                        });
+                    }
+                });
+            }
+
+            currentSearchIndex = 0;
+            isSearchMode = searchResults.length > 0;
+
+            if (searchResults.length > 0) {
+                if (searchResultsSpan) {
+                    searchResultsSpan.textContent = `Found ${searchResults.length} jokes - Use PREV/NEXT to browse`;
+                }
+                if (clearSearchBtn) {
+                    clearSearchBtn.style.display = 'inline-block';
+                }
+
+                // Show first result
+                showSearchResult(0);
+            } else {
+                if (searchResultsSpan) {
+                    searchResultsSpan.textContent = 'No jokes found matching "' + query + '"';
+                }
+                if (clearSearchBtn) {
+                    clearSearchBtn.style.display = 'none';
+                }
+            }
+        }
+
+        // Show a specific search result
+        function showSearchResult(index) {
+            if (!isSearchMode || searchResults.length === 0) return;
+
+            currentSearchIndex = index;
+            const result = searchResults[index];
+
+            // Update category display
+            currentCategory = result.category;
+            updateCategoryButtons();
+
+            // Display the joke
+            displayJoke(result.joke);
+
+            // Update results text
+            if (searchResultsSpan) {
+                searchResultsSpan.textContent = `Result ${index + 1}/${searchResults.length} (${result.category.toUpperCase()})`;
+            }
+        }
+
+        // Clear search and return to normal mode
+        function clearSearch() {
+            isSearchMode = false;
+            searchResults = [];
+            currentSearchIndex = 0;
+
+            if (jokeSearchInput) {
+                jokeSearchInput.value = '';
+            }
+            if (searchResultsSpan) {
+                searchResultsSpan.textContent = '';
+            }
+            if (clearSearchBtn) {
+                clearSearchBtn.style.display = 'none';
+            }
+
+            console.log('Search cleared');
+        }
+
         // Load available voices and select a good one for jokes
         function loadVoices() {
             try {
@@ -7735,6 +7953,18 @@ const audienceReactions = [
 
         // Show a specific joke from history
         function showPreviousJoke() {
+            // Check if in search mode
+            if (isSearchMode && searchResults.length > 0) {
+                if (currentSearchIndex > 0) {
+                    showSearchResult(currentSearchIndex - 1);
+                } else {
+                    // Visual feedback that we're at the beginning
+                    prevBtn.classList.add('shake');
+                    setTimeout(() => prevBtn.classList.remove('shake'), 500);
+                }
+                return;
+            }
+
             if (currentJokeIndex > 0) {
                 currentJokeIndex--;
                 displayJoke(jokeHistory[currentJokeIndex]);
@@ -7747,6 +7977,18 @@ const audienceReactions = [
 
         // Show next joke from history
         function showNextJoke() {
+            // Check if in search mode
+            if (isSearchMode && searchResults.length > 0) {
+                if (currentSearchIndex < searchResults.length - 1) {
+                    showSearchResult(currentSearchIndex + 1);
+                } else {
+                    // Visual feedback that we're at the end
+                    nextBtn.classList.add('shake');
+                    setTimeout(() => nextBtn.classList.remove('shake'), 500);
+                }
+                return;
+            }
+
             if (currentJokeIndex < jokeHistory.length - 1) {
                 currentJokeIndex++;
                 displayJoke(jokeHistory[currentJokeIndex]);
@@ -8037,7 +8279,12 @@ const audienceReactions = [
             debugModeBtn = document.getElementById('debugModeBtn');
             loadingOverlay = document.getElementById('loadingOverlay');
             loadingBar = document.getElementById('loadingBar');
-            
+            jokeSearchInput = document.getElementById('jokeSearch');
+            searchBtn = document.getElementById('searchBtn');
+            clearSearchBtn = document.getElementById('clearSearchBtn');
+            searchResultsSpan = document.getElementById('searchResults');
+            soundToggleBtn = document.getElementById('soundToggleBtn');
+
             // Extract words from jokes for the nonsense category
             extractWordsFromJokes();
             
@@ -8062,6 +8309,30 @@ const audienceReactions = [
             if (rimShotBtn) rimShotBtn.addEventListener('click', playRimShot);
             if (groanBtn) groanBtn.addEventListener('click', playGroan);
             if (autoShuffleBtn) autoShuffleBtn.addEventListener('click', toggleAutoShuffle);
+
+            // Search functionality
+            if (searchBtn) {
+                searchBtn.addEventListener('click', performSearch);
+                console.log('✅ Search button listener attached');
+            }
+            if (clearSearchBtn) {
+                clearSearchBtn.addEventListener('click', clearSearch);
+                console.log('✅ Clear search button listener attached');
+            }
+            if (jokeSearchInput) {
+                jokeSearchInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        performSearch();
+                    }
+                });
+                console.log('✅ Search input listener attached');
+            }
+
+            // Sound effects toggle
+            if (soundToggleBtn) {
+                soundToggleBtn.addEventListener('click', toggleSoundEffects);
+                console.log('✅ Sound toggle button listener attached');
+            }
 
             // Debug: Log if any critical buttons are missing
             if (!generateBtn) console.error('generateBtn not found');
